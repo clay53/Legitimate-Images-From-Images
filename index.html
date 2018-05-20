@@ -24,7 +24,7 @@ pixelPerfect: <input type="checkbox" name="pixelPerfect" id="pixelPerfect" oncha
 
 Target Image: <input type="file" name="targetImage" id="targetImage" onchange="handleTargetImageChange()">
 <br/>
-Source Images: <input type="file" name="sourceImages" id="sourceImages" onchange="handleSourceImagesChange()" input>
+Source Images: <input type="file" name="sourceImages" id="sourceImages" onchange="handleSourceImagesChange()" multiple>
 <br/>
 <input type="text" id="return"/>
 <br/>
@@ -100,7 +100,8 @@ Source Images: <input type="file" name="sourceImages" id="sourceImages" onchange
                 extension === "jpg" ||
                 extension === "jpeg" ||
                 extension === "svg" ||
-                extension === "png"
+                extension === "png" ||
+                extension === "webp"
             ) {
                 console.log(f.name);
                 console.log(f.size);
@@ -120,6 +121,9 @@ Source Images: <input type="file" name="sourceImages" id="sourceImages" onchange
     }
     
     function handleSourceImagesChange() {
+        if (document.getElementById("sourceImages").files.length > 1) {
+            print (document.getElementById("sourceImages").files);
+        }
         var results = [];
         for (var i = 0 ; i < document.getElementById("sourceImages").files.length; i++) {
             var f = document.getElementById("sourceImages").files[i];
@@ -131,15 +135,15 @@ Source Images: <input type="file" name="sourceImages" id="sourceImages" onchange
                 extension === "jpg" ||
                 extension === "jpeg" ||
                 extension === "svg" ||
-                extension === "png"
+                extension === "png" ||
+                extension === "webp"
             ) {
                 console.log(f.name);
                 console.log(f.size);
                 var reader = new FileReader();
                 reader.readAsDataURL(f);
-                reader.onload = function () {
-                    console.log(reader.result);
-                    var result = loadImage(reader.result);
+                reader.onload = function (e) {
+                    var result = loadImage(e.target.result);
                     
                     sourceImgs.push({
                         image: result,
