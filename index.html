@@ -178,9 +178,10 @@ Source Images: <input type="file" name="sourceImages" id="sourceImages" onchange
                     for (var j = 0; j < result.width; j++) {
                         for (var k = 0; k < result.height; k++) {
                             var c = result.get(j, k);
-                            colorAvgR += c[0];
-                            colorAvgG += c[1];
-                            colorAvgB += c[2];
+                            var a = c[3]/255;
+                            colorAvgR += 255-(255-c[0])*a;
+                            colorAvgG += 255-(255-c[1])*a;
+                            colorAvgB += 255-(255-c[2])*a;
                         }
                     }
                     colorAvgR = Math.round(colorAvgR/(result.width*result.height));
@@ -245,9 +246,10 @@ Source Images: <input type="file" name="sourceImages" id="sourceImages" onchange
                     // cB = Math.round(cB/(cS.width*cS.height));
                     
                     var c = t.get(i, j);
-                    var cR = c[0];
-                    var cG = c[1];
-                    var cB = c[2];
+                    var cA = c[3]/255;
+                    var cR = 255-(255-c[0])*cA;
+                    var cG = 255-(255-c[1])*cA;
+                    var cB = 255-(255-c[2])*cA;
                     
                     var cRD = 255;
                     var cGD = 255;
@@ -256,7 +258,7 @@ Source Images: <input type="file" name="sourceImages" id="sourceImages" onchange
                     var closestImg;
                     for (var k = 0; k < sourceImgsG.length; k++) {
                         var s = sourceImgsG[k];
-                        if ((Math.abs(cR-s.cAR)+Math.abs(cG-s.cAG)+Math.abs(cB-s.cAB)) < cD) {
+                        if ((Math.abs(cR-s.cAR)+Math.abs(cG-s.cAG)+Math.abs(cB-s.cAB)) <= cD) {
                             cRD = Math.abs(cR-s.cAR);
                             cGD = Math.abs(cG-s.cAG);
                             cBD = Math.abs(cB-s.cAB)
