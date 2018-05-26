@@ -20,7 +20,8 @@ body {
 <script>
 	function setup() {
 		var c = createCanvas(windowWidth, windowHeight);
-		frameRate(20000);
+		noLoop();
+    setInterval(redraw, 0);
 	}
 </script>
 
