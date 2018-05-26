@@ -21,12 +21,13 @@ body {
 	function setup() {
 		var c = createCanvas(windowWidth, windowHeight);
 		noLoop();
-    setInterval(redraw, 0);
 	}
 </script>
 
+<script src="globals.js"></script>
 <script src="handlers.js"></script>
-
+fps (0=unlimited): <input type="number" name="fps" id="fps" onchange="handleFrameRateChange()" value="0" input/>
+<br/>
 subSize: <input type="number" name="subSize" id="subSize" onchange="handleSettingsChange()" value="10" input/>
 <br/>
 pixelPerfect: <input type="checkbox" name="pixelPerfect" id="pixelPerfect" onchange="handleSettingsChange()" unchecked/>

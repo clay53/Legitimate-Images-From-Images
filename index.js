@@ -5,6 +5,7 @@ function resizeWindow() {
 }
 
 function draw () {
+    setTimeout(redraw, frameRate);
 	push();
 	if (sourceImgsExist) {
 		for (var i = 0; i < sourceImgs.length; i++) {
